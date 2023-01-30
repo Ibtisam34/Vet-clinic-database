@@ -9,5 +9,5 @@ CREATE TABLE animals (
  date_of_birth DATE,
  escape_attemps INT,
  neutered BOOLEAN,
- weight_kg DECIMAL(10,2)
+ weight_kg DECIMAL(5,2)
 );
