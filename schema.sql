@@ -4,10 +4,10 @@ CREATE DATABASE VET_CLINIC:
 USE VET_CLINIC;
 
 CREATE TABLE animals (
- id INT PRIMARY KEY AUTO_INCREMENT,
- name VARCHAR(255),
- date_of_birth DATE,
- escape_attemps INT,
- neutered BOOLEAN,
- weight_kg DECIMAL(5,2)
+ id INT AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(255) NOT NULL,
+ date_of_birth DATE NOT NULL,
+ escape_attemps INT NOT NULL,
+ neutered BOOLEAN NOT NULL,
+ weight_kg DECIMAL(5,2) NOT NULL
 );
