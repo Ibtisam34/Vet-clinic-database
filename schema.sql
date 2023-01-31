@@ -33,3 +33,33 @@ FOREIGN KEY (species_id) REFERENCES species (id);
 ALTER TABLE animals
 ADD CONSTRAINT fk_owner_id
 FOREIGN KEY (owner_id) REFERENCES owners (id);
+
+CREATE TABLE vets (
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  name VARCHAR(255),
+  age INT,
+  date_of_graduation DATE
+);
+
+CREATE TABLE specializations (
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  species_id INT,
+  vet_id INT,
+  FOREIGN KEY (species_id) REFERENCES species(id),
+  FOREIGN KEY (vet_id) REFERENCES vets(id)
+);
+CREATE TABLE visits (
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  animal_id INT,
+  vet_id INT,
+  date DATE,
+  FOREIGN KEY (animal_id) REFERENCES animals(id),
+  FOREIGN KEY (vet_id) REFERENCES vets(id)
+);
+
+
+
+
+
+
+

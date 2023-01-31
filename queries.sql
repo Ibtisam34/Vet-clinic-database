@@ -113,6 +113,69 @@ FROM species
 JOIN animals ON animals.species_id = species.id
 GROUP BY species.name;
 
+-- 1. Who was the last animal seen by William Tatcher?
+SELECT a.name AS animal_name
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets ve ON v.vet_id = ve.id
+WHERE ve.name = 'William Tatcher'
+ORDER BY v.date DESC
+LIMIT 1;
+-- 2. How many different animals did Stephanie Mendez see?
+SELECT COUNT(DISTINCT a.name) AS num_animals
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets ve ON v.vet_id = ve.id
+WHERE ve.name = 'Stephanie Mendez';
+-- 3. List all vets and their specialties, including vets with no specialties.
+SELECT ve.name AS vet_name, GROUP_CONCAT(s.name SEPARATOR ', ') AS specialties
+FROM vets ve
+LEFT JOIN specializations sp ON ve.id = sp.vet_id
+LEFT JOIN species s ON sp.species_id = s.id
+GROUP BY ve.name;
+-- 4. List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
+SELECT a.name AS animal_name
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets ve ON v.vet_id = ve.id
+WHERE ve.name = 'Stephanie Mendez' AND v.date BETWEEN '2020-04-01' AND '2020-08-30';
+-- 5. What animal has the most visits to vets?
+SELECT a.name AS animal_name, COUNT(*) AS num_visits
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+GROUP BY a.name
+ORDER BY num_visits DESC
+LIMIT 1;
+-- 6. Who was Maisy Smith's first visit?
+SELECT a.name AS animal_name
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets ve ON v.vet_id = ve.id
+WHERE ve.name = 'Maisy Smith'
+ORDER BY v.date
+LIMIT 1;
+-- 7. Details for most recent visit: animal information, vet information, and date of visit.
+SELECT a.name AS animal_name, ve.name AS vet_name, v.date
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets ve ON v.vet_id = ve.id
+ORDER BY v.date DESC
+LIMIT 1;
+-- 8. How many visits were with a vet that did not specialize in that animal's species?
+SELECT COUNT(*)
+FROM visits v
+JOIN animals a ON v.animal_id = a.id
+JOIN vets ve ON v.vet_id = ve.id
+LEFT JOIN specializations sp ON ve.id = sp.vet_id AND sp.species_id = a.species_id
+WHERE sp.id IS NULL;
+
+
+
+
+
+
+
+
 
 
 
