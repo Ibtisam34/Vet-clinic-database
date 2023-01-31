@@ -94,6 +94,24 @@ FROM animals
 WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31'
 GROUP BY species;
 
+-- What animals belong to Melody Pond?
+SELECT animals.*
+FROM animals
+JOIN owners ON animals.owner_id = owners.id
+WHERE owners.full_name = 'Melody Pond';
+-- List of all animals that are pokemon (their type is Pokemon).
+SELECT *
+FROM animals
+JOIN species ON animals.species_id = species.id
+WHERE species.name = 'Pokemon';-- List all owners and their animals, remember to include those that don't own any animal.
+SELECT owners.*, animals.name
+FROM owners
+LEFT JOIN animals ON owners.id = animals.owner_id;
+-- How many animals are there per species?
+SELECT species.name, COUNT(*) as animal_count
+FROM species
+JOIN animals ON animals.species_id = species.id
+GROUP BY species.name;
 
 
 
