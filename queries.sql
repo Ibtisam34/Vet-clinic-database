@@ -94,37 +94,47 @@ FROM animals
 WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31'
 GROUP BY species;
 
--- What animals belong to Melody Pond?
-SELECT animals.*
-FROM animals
-JOIN owners ON animals.owner_id = owners.id
-WHERE owners.full_name = 'Melody Pond';
--- List of all animals that are pokemon (their type is Pokemon).
-SELECT *
-FROM animals
-JOIN species ON animals.species_id = species.id
-WHERE species.name = 'Pokemon';-- List all owners and their animals, remember to include those that don't own any animal.
-SELECT owners.*, animals.name
-FROM owners
-LEFT JOIN animals ON owners.id = animals.owner_id;
--- How many animals are there per species?
-SELECT species.name, COUNT(*) as animal_count
-FROM species
-JOIN animals ON animals.species_id = species.id
-GROUP BY species.name;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT a.*
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets vt ON vt.id = v.vet_id
+WHERE vt.name = 'William Tatcher'
+ORDER BY v.date DESC
+LIMIT 1;
+SELECT COUNT(DISTINCT a.id)
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets vt ON vt.id = v.vet_id
+WHERE vt.name = 'Stephanie Mendez';
+SELECT a.*
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets vt ON vt.id = v.vet_id
+WHERE vt.name = 'Stephanie Mendez'
+AND v.date BETWEEN '2020-04-01' AND '2020-08-30';
+SELECT a.*, COUNT(a.id)
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+GROUP BY a.id
+ORDER BY COUNT(a.id) DESC
+LIMIT 1;
+SELECT a.*
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets vt ON vt.id = v.vet_id
+WHERE vt.name = 'Maisy Smith'
+ORDER BY v.date
+LIMIT 1;
+SELECT a.*, vt.*, v.date
+FROM animals a
+JOIN visits v ON a.id = v.animal_id
+JOIN vets vt ON vt.id = v.vet_id
+ORDER BY v.date DESC
+LIMIT 1;
+SELECT species.name AS MARY_SMITH_should_specialse_on FROM visits
+JOIN vets ON visits.vet_id=vets.id 
+JOIN animals ON visits.animal_id=animals.id 
+JOIN species ON animals.species_id=species.id 
+WHERE visits.vet_id = (SELECT id FROM vets WHERE name = 'Maisy Smith') 
+GROUP BY species.name 
+ORDER BY COUNT(visits.animal_id) DESC LIMIT 1;

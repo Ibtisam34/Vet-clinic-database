@@ -18,15 +18,15 @@ VALUES
 ('Blossom', '1998-10-13', 3, true, 17.0);
 ('Ditto', '2022-05-14', 4, true, 22.0);
 
-INSERT INTO owners (full_name, age) VALUES
-  ('Sam Smith', 34);
-  ('Jennifer Orwell', 19);
-  ('Bob', 45);
-  ('Melody Pond', 77);
-  ('Dean Winchester', 14);
-  ('Jodie Whittaker', 38);
+ INSERT INTO owners (full_name,age) VALUES (
+     'Sam Smith', 34);
+     ('Jennifer Orwell', 19);
+     ('Bob', 45);
+     ('Melody Pond', 77);
+     ('Dean Winchester', 14);
+     ('Jodie Whittaker', 38);
 INSERT INTO species (name) VALUES
-  ('Pokemon'),
+  ('Pokemon');
   ('Digimon');
  UPDATE animals
 SET species_id = (
@@ -35,16 +35,58 @@ SET species_id = (
     ELSE (SELECT id FROM species WHERE name = 'Pokemon' LIMIT 1)
   END
 ),
-owner_id = (CASE
-    WHEN name = 'Agumon' THEN (SELECT id FROM owners WHERE full_name = 'Sam Smith' LIMIT 1)
-    WHEN name = 'Gabumon' THEN (SELECT id FROM owners WHERE full_name = 'Jennifer Orwell' LIMIT 1)
-    WHEN name = 'Pikachu' THEN (SELECT id FROM owners WHERE full_name = 'Jennifer Orwell' LIMIT 1)
-    WHEN name = 'Devimon' THEN (SELECT id FROM owners WHERE full_name = 'Bob' LIMIT 1)
-    WHEN name = 'Plantmon' THEN (SELECT id FROM owners WHERE full_name = 'Bob' LIMIT 1)
-    WHEN name = 'Charmander' THEN (SELECT id FROM owners WHERE full_name = 'Melody Pond' LIMIT 1)
-    WHEN name = 'Squirtle' THEN (SELECT id FROM owners WHERE full_name = 'Melody Pond' LIMIT 1)
-    WHEN name = 'Blossom' THEN (SELECT id FROM owners WHERE full_name = 'Melody Pond' LIMIT 1)
-    WHEN name = 'Angemon' THEN (SELECT id FROM owners WHERE full_name = 'Dean Winchester' LIMIT 1)
-    WHEN name = 'Boarmon' THEN (SELECT id FROM owners WHERE full_name = 'Dean Winchester' LIMIT 1)
-  END
-);
+
+UPDATE animals SET owners_id = (SELECT id FROM owners WHERE name = 'Sam Smith') WHERE name ='Agumon';
+UPDATE animals SET owners_id = 2 WHERE name = 'Gabumon';
+UPDATE animals SET owners_id = 2 WHERE name = 'Pikachu';
+UPDATE animals SET owners_id = (SELECT id FROM owners WHERE full_name = 'Bob') WHERE name IN ('Devimon', 'Plantmon');
+UPDATE animals SET owners_id = (SELECT id FROM owners WHERE full_name = 'Melody Pond') WHERE name IN ('Charmander', 'Squirtle', 'Blossom');
+UPDATE animals SET owners_id = (SELECT id FROM owners WHERE full_name = 'Dean Winchester') WHERE name IN ('Angemon', 'Boarmon');
+
+
+
+
+
+INSERT INTO vets (name, age, date_of_graduation)
+VALUES ('William Tatcher', 45, '2000-04-23');
+  ('Maisy Smith', 26, '2019-01-17');
+  ('Stephanie Mendez', 64, '1981-05-04');
+  ('Jack Harkness', 38, '2008-06-08');
+
+INSERT INTO specializations (vet_id, species_id)
+SELECT vets.id, species.id
+FROM vets
+JOIN species
+ON species.name = 'Pokemon' OR species.name = 'Digimon'
+WHERE vets.name IN ('William Tatcher', 'Stephanie Mendez', 'Jack Harkness');
+
+INSERT INTO visits (animal_id, vet_id, date) VALUES (1,1,'2020-05-24'),
+    (1,3,'2020-07-22'),
+    (2,4,'2021-02-02'),
+    (3,2,'2020-01-05'),
+    (3,2,'2020-03-08'),
+    (3,2,'2020-05-14'),
+    (4,3,'2021-05-04'),
+    (5,4,'2021-02-24'),
+    (7,2,'2019-12-21'),
+    (7,1,'2020-08-10'),
+    (7,2,'2021-04-07'),
+    (8,3,'2019-09-29'),
+    (9,4,'2020-10-03'),
+    (9,4,'2020-11-04'),
+    (10,2,'2019-01-24'),
+    (10,2,'2019-05-15'),
+    (10,2,'2020-02-27'),
+    (10,2,'2020-08-03'),
+    (11,3,'2020-05-24'), 
+    (11,1,'2021-01-11');
+
+
+
+
+
+
+
+
+
+
