@@ -94,100 +94,47 @@ FROM animals
 WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31'
 GROUP BY species;
 
--- What animals belong to Melody Pond?
-SELECT animals.*
-FROM animals
-JOIN owners ON animals.owner_id = owners.id
-WHERE owners.full_name = 'Melody Pond';
--- List of all animals that are pokemon (their type is Pokemon).
-SELECT *
-FROM animals
-JOIN species ON animals.species_id = species.id
-WHERE species.name = 'Pokemon';-- List all owners and their animals, remember to include those that don't own any animal.
-SELECT owners.*, animals.name
-FROM owners
-LEFT JOIN animals ON owners.id = animals.owner_id;
--- How many animals are there per species?
-SELECT species.name, COUNT(*) as animal_count
-FROM species
-JOIN animals ON animals.species_id = species.id
-GROUP BY species.name;
-
--- 1. Who was the last animal seen by William Tatcher?
-SELECT a.name AS animal_name
+SELECT a.*
 FROM animals a
 JOIN visits v ON a.id = v.animal_id
-JOIN vets ve ON v.vet_id = ve.id
-WHERE ve.name = 'William Tatcher'
+JOIN vets vt ON vt.id = v.vet_id
+WHERE vt.name = 'William Tatcher'
 ORDER BY v.date DESC
 LIMIT 1;
--- 2. How many different animals did Stephanie Mendez see?
-SELECT COUNT(DISTINCT a.name) AS num_animals
+SELECT COUNT(DISTINCT a.id)
 FROM animals a
 JOIN visits v ON a.id = v.animal_id
-JOIN vets ve ON v.vet_id = ve.id
-WHERE ve.name = 'Stephanie Mendez';
--- 3. List all vets and their specialties, including vets with no specialties.
-SELECT ve.name AS vet_name, GROUP_CONCAT(s.name SEPARATOR ', ') AS specialties
-FROM vets ve
-LEFT JOIN specializations sp ON ve.id = sp.vet_id
-LEFT JOIN species s ON sp.species_id = s.id
-GROUP BY ve.name;
--- 4. List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
-SELECT a.name AS animal_name
+JOIN vets vt ON vt.id = v.vet_id
+WHERE vt.name = 'Stephanie Mendez';
+SELECT a.*
 FROM animals a
 JOIN visits v ON a.id = v.animal_id
-JOIN vets ve ON v.vet_id = ve.id
-WHERE ve.name = 'Stephanie Mendez' AND v.date BETWEEN '2020-04-01' AND '2020-08-30';
--- 5. What animal has the most visits to vets?
-SELECT a.name AS animal_name, COUNT(*) AS num_visits
+JOIN vets vt ON vt.id = v.vet_id
+WHERE vt.name = 'Stephanie Mendez'
+AND v.date BETWEEN '2020-04-01' AND '2020-08-30';
+SELECT a.*, COUNT(a.id)
 FROM animals a
 JOIN visits v ON a.id = v.animal_id
-GROUP BY a.name
-ORDER BY num_visits DESC
+GROUP BY a.id
+ORDER BY COUNT(a.id) DESC
 LIMIT 1;
--- 6. Who was Maisy Smith's first visit?
-SELECT a.name AS animal_name
+SELECT a.*
 FROM animals a
 JOIN visits v ON a.id = v.animal_id
-JOIN vets ve ON v.vet_id = ve.id
-WHERE ve.name = 'Maisy Smith'
+JOIN vets vt ON vt.id = v.vet_id
+WHERE vt.name = 'Maisy Smith'
 ORDER BY v.date
 LIMIT 1;
--- 7. Details for most recent visit: animal information, vet information, and date of visit.
-SELECT a.name AS animal_name, ve.name AS vet_name, v.date
+SELECT a.*, vt.*, v.date
 FROM animals a
 JOIN visits v ON a.id = v.animal_id
-JOIN vets ve ON v.vet_id = ve.id
+JOIN vets vt ON vt.id = v.vet_id
 ORDER BY v.date DESC
 LIMIT 1;
--- 8. How many visits were with a vet that did not specialize in that animal's species?
-SELECT COUNT(*)
-FROM visits v
-JOIN animals a ON v.animal_id = a.id
-JOIN vets ve ON v.vet_id = ve.id
-LEFT JOIN specializations sp ON ve.id = sp.vet_id AND sp.species_id = a.species_id
-WHERE sp.id IS NULL;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT species.name AS MARY_SMITH_should_specialse_on FROM visits
+JOIN vets ON visits.vet_id=vets.id 
+JOIN animals ON visits.animal_id=animals.id 
+JOIN species ON animals.species_id=species.id 
+WHERE visits.vet_id = (SELECT id FROM vets WHERE name = 'Maisy Smith') 
+GROUP BY species.name 
+ORDER BY COUNT(visits.animal_id) DESC LIMIT 1;

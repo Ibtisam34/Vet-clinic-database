@@ -43,21 +43,32 @@ CREATE TABLE vets (
 
 CREATE TABLE specializations (
   id BIGSERIAL NOT NULL PRIMARY KEY,
-  species_id INT,
-  vet_id INT,
+  species_id INTEGER,
+  vet_id INTEGER,
   FOREIGN KEY (species_id) REFERENCES species(id),
   FOREIGN KEY (vet_id) REFERENCES vets(id)
 );
 CREATE TABLE visits (
   id BIGSERIAL NOT NULL PRIMARY KEY,
-  animal_id INT,
-  vet_id INT,
+  animal_id INTEGER,
+  vet_id INTEGER,
   date DATE,
   FOREIGN KEY (animal_id) REFERENCES animals(id),
   FOREIGN KEY (vet_id) REFERENCES vets(id)
 );
 
+ CREATE TABLE visits (
+animal_id INT REFERENCES animals(id),
+vet_id INT REFERENCES vets(id),
+date DATE,
+PRIMARY KEY (animal_id, vet_id)
+);
 
+ALTER TABLE visits DROP CONSTRAINT visits_pkey;
+ALTER TABLE visits
+DROP CONSTRAINT visits_animal_id_fkey,
+DROP CONSTRAINT visits_vet_id_fkey;
+ 
 
 
 
