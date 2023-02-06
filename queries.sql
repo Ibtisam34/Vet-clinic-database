@@ -138,3 +138,8 @@ JOIN species ON animals.species_id=species.id
 WHERE visits.vet_id = (SELECT id FROM vets WHERE name = 'Maisy Smith') 
 GROUP BY species.name 
 ORDER BY COUNT(visits.animal_id) DESC LIMIT 1;
+
+
+ EXPLAIN ANALYZE SELECT COUNT(*) FROM visits WHERE animal_id = 4;
+ EXPLAIN ANALYZE SELECT * FROM visits where vet_id = 2;
+ SELECT * FROM owners where email = 'owner_18327@mail.com';

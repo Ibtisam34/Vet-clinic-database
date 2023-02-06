@@ -25,6 +25,10 @@ VALUES
      ('Melody Pond', 77);
      ('Dean Winchester', 14);
      ('Jodie Whittaker', 38);
+
+     INSERT INTO owners (full_name, email)
+SELECT 'Owner ' || generate_series(1, 2500000), 'owner_' || generate_series(1, 2500000) || '@mail.com';
+
 INSERT INTO species (name) VALUES
   ('Pokemon');
   ('Digimon');
@@ -81,7 +85,11 @@ INSERT INTO visits (animal_id, vet_id, date) VALUES (1,1,'2020-05-24'),
     (11,3,'2020-05-24'), 
     (11,1,'2021-01-11');
 
-
+INSERT INTO visits (animal_id, vet_id, date)
+SELECT animal_ids.id, vets_ids.id, date_trunc('day', visit_timestamp)
+FROM (SELECT id FROM animals) animal_ids,
+     (SELECT id FROM vets) vets_ids,
+     generate_series('1980-01-01'::timestamp, '2021-01-01', '4 hours') AS visit_timestamp;
 
 
 
