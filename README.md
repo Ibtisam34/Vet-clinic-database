@@ -28,7 +28,7 @@
 
 # 📖 [vet-clinic-DATABASE] <a name="about-project"></a>
 
-> > In this project a relational database is created to store the data for a vet clinic.
+> [vet-clinic-DATABASE] is a relational database to create the initial data structure for a vet clinic. A table was created to store animals' information, insert some data into it, and query it.
 
 **[Vet-clinic-DATABASE]** is a...
 
@@ -140,12 +140,11 @@ Microsoft Azure SQL Database.
 
 - GitHub: [@githubhandle](https://github.com/ibtisam34)
 - Twitter: [@twitterhandle](https://twitter.com/Queenjin2)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/falis-abdikani)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/falis-abdikani/)
 
 👤 **Author2**
 
 - GitHub: [@githubhandle](https://github.com/Mukumbuta/Mukumbuta)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/mukumbuta)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
