@@ -28,7 +28,7 @@
 
 # 📖 [vet-clinic-DATABASE] <a name="about-project"></a>
 
-> > In this project a relational database is created to store the data for a vet clinic.
+> [vet-clinic-DATABASE] is a relational database to create the initial data structure for a vet clinic. A table was created to store animals' information, insert some data into it, and query it.
 
 **[Vet-clinic-DATABASE]** is a...
 
@@ -140,7 +140,11 @@ Microsoft Azure SQL Database.
 
 - GitHub: [@githubhandle](https://github.com/ibtisam34)
 - Twitter: [@twitterhandle](https://twitter.com/Queenjin2)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/falis-abdikani)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/falis-abdikani/)
+
+👤 **Author2**
+
+- GitHub: [@githubhandle](https://github.com/Mukumbuta/Mukumbuta)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -196,7 +200,7 @@ I would like to thank the Microverse team for their great support!
 
 ## 📝 License <a name="license"></a>
 
-This project is [MIT](./LICENSE) licensed.
+This project is [MIT](https://github.com/Ibtisam34/Vet-clinic-database/blob/database6/MIT.md) licensed.
 
 _NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
 
