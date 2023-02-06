@@ -21,6 +21,9 @@ CREATE TABLE owners (
   full_name VARCHAR(255),
   age INTEGER
 );
+
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
 CREATE TABLE species (
   id BIGSERIAL NOT NULL PRIMARY KEY,
   name VARCHAR(255)
@@ -69,8 +72,5 @@ ALTER TABLE visits
 DROP CONSTRAINT visits_animal_id_fkey,
 DROP CONSTRAINT visits_vet_id_fkey;
  
-
-
-
 
 
