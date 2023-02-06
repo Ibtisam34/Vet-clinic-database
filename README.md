@@ -142,6 +142,11 @@ Microsoft Azure SQL Database.
 - Twitter: [@twitterhandle](https://twitter.com/Queenjin2)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/falis-abdikani)
 
+👤 **Author2**
+
+- GitHub: [@githubhandle](https://github.com/Mukumbuta/Mukumbuta)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/mukumbuta)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
