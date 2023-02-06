@@ -139,10 +139,6 @@ WHERE visits.vet_id = (SELECT id FROM vets WHERE name = 'Maisy Smith')
 GROUP BY species.name 
 ORDER BY COUNT(visits.animal_id) DESC LIMIT 1;
 
-CREATE INDEX animals_id_asc ON visits (animal_id  ASC);[1:50 PM] CREATE INDEX email_asc ON owners (email ASC);
-explain analyze SELECT COUNT(*) FROM visits where animal_id = 4; SELECT COUNT(*) FROM visits where animal_id = 4;
-explain analyze SELECT * FROM visits where vet_id = 2;
-explain analyze SELECT * FROM owners where email = 'owner_18327@mail.com';
 
 CREATE INDEX animals_id_asc ON visits (animal_id  ASC);
 CREATE INDEX email_asc ON owners (email ASC);
